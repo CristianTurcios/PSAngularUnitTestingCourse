@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeroComponent } from './hero.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('HeroComponent (sahllow test)', () => {
   // Al envolver nuestro componente dentro de component fixture
@@ -38,5 +39,13 @@ describe('HeroComponent (sahllow test)', () => {
     // al igual que con componentInstance tenemos acceso al componente (todo el ts)
     // con nativeElement tenemos acceso a la plantilla del componente y podemos hacer test de que se renderiza en la plantilla
     expect(fixture.nativeElement.querySelector('a').textContent).toContain('SuperDude');
+
+
+    // Existe otro metodo para manipular el dom que es el debug element, la unica razon por la cual podriamos usar el debug element
+    // es porque expone mas caracteristicas que podriamos utilizar para otros propositos, por ejemplo cuando testeamos directivas
+    // podria usarse para testear el routerLink
+    // nos puede proporcinar una instancia de un componente, y si obtenemos un elemento html,
+    // este nos podria decir a que componente pertenece esa etiqueta html que capturo
+    expect(fixture.debugElement.query(By.css('a')).nativeElement.textContent).toContain('SuperDude');
   });
 });
